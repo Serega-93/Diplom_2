@@ -18,9 +18,11 @@ class UserMethods:
     @staticmethod
     @allure.title('Обновление данных пользователя')
     def update_user_data(body, token):
-        return requests.patch(f'{Url.BASE_URL}{Url.UPDATE_USER}', auth=token, json=body)
+        header = { "Authorization": token }
+        return requests.patch(f'{Url.BASE_URL}{Url.UPDATE_USER}', headers=header, json=body)
 
     @staticmethod
     @allure.title('Удаление пользователя')
     def delete_user(token):
-        return requests.delete(f'{Url.BASE_URL}{Url.DELETE_USER}', auth=token)
+        header = {"Authorization": token}
+        return requests.delete(f'{Url.BASE_URL}{Url.DELETE_USER}', headers=header)

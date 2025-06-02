@@ -23,3 +23,9 @@ def creating_user_and_order(creating_user):
     OrderMethods.created_order(order_body, token)
     yield token
     UserMethods.delete_user(token)
+
+@pytest.fixture
+def delete_user(request):
+    token = None
+    yield token
+    UserMethods.delete_user(token)

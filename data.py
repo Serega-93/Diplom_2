@@ -15,4 +15,3 @@ class Ingredients:
     @staticmethod
     def ingredients_body(bun, main, souse):
         return { 'ingredients': [bun, main, souse]}
-
