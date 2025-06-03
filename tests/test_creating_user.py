@@ -1,5 +1,5 @@
 import allure
-
+import pytest
 from generator import DataCreatedUser
 from user_methods import UserMethods
 
@@ -13,7 +13,28 @@ class TestCreatingUser:
         token = response.json()["accessToken"]
         request.node.funcargs["delete_user"] = token
         actual_body = response.json()
-        element_expected_body = 'success'
 
         assert response.status_code == 200
-        assert element_expected_body in actual_body
+        assert actual_body["success"] is True
+
+    @allure.title('Создание уже зарегистрированного пользователя')
+    def test_creating_registered_user(self, creating_user):
+        token, user_body = creating_user
+        response = UserMethods.created_user(user_body)
+        expected_body = {"success": False,"message": "User already exists"}
+        actual_body = response.json()
+
+        assert response.status_code == 403
+        assert actual_body == expected_body
+
+    @pytest.mark.parametrize('email, password, name', [['', 555555, 'serega'],['qatest-11@yandex.ru', '', 'serega'],
+                                                      ['qatest-11@yandex.ru', 555555, '']])
+    @allure.title('Создание пользователя без заполненного поля')
+    def test_creating_user_without_filled_field(self, email, password, name):
+        user_body = {"email": email, "password": password, "name": name}
+        response = UserMethods.created_user(user_body)
+        expected_body ={"success": False, "message": "Email, password and name are required fields"}
+        actual_body = response.json()
+
+        assert response.status_code == 403
+        assert actual_body == expected_body

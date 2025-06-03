@@ -11,7 +11,7 @@ def creating_user():
     user_body = DataCreatedUser.generate_body()
     body = UserMethods.created_user(user_body)
     token = body.json()["accessToken"]
-    yield token
+    yield token, user_body
     UserMethods.delete_user(token)
 
 @pytest.fixture
