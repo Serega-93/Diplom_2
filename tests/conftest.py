@@ -1,5 +1,4 @@
 import pytest
-
 from data import Ingredients
 from generator import DataCreatedUser
 from order_methods import OrderMethods

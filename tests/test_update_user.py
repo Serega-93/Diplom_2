@@ -8,22 +8,13 @@ class TestUpdateUser:
     def test_update_data_email_user(self, creating_user):
         token, user_body = creating_user
         new_email = f'q{user_body["email"]}'
-        update_body = {"email": new_email, "name": user_body["name"]}
+        new_name = f'q{user_body["name"]}'
+        update_body = {"email": new_email, "name": new_name}
         response = UserMethods.update_user_data(update_body, token)
         actual_body = response.json()
 
         assert response.status_code == 200
         assert actual_body["user"]["email"] == new_email
-
-    @allure.title('Изменение поле name пользователя')
-    def test_update_data_name_user(self, creating_user):
-        token, user_body = creating_user
-        new_name = f'q{user_body["name"]}'
-        update_body = {"email": user_body["email"], "name": new_name}
-        response = UserMethods.update_user_data(update_body, token)
-        actual_body = response.json()
-
-        assert response.status_code == 200
         assert actual_body["user"]["name"] == new_name
 
     @allure.title('Ошибка при изменении данных без авторизации')

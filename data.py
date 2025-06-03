@@ -8,10 +8,10 @@ class Url:
     DELETE_USER = '/api/auth/user'
 
 class Ingredients:
-    bun = '61c0c5a71d1f82001bdaaa6c'
-    main = '61c0c5a71d1f82001bdaaa6e'
-    souse = '61c0c5a71d1f82001bdaaa73'
 
     @staticmethod
-    def ingredients_body(bun, main, souse):
+    def ingredients_body():
+        bun = '61c0c5a71d1f82001bdaaa6c'
+        main = '61c0c5a71d1f82001bdaaa6e'
+        souse = '61c0c5a71d1f82001bdaaa73'
         return { 'ingredients': [bun, main, souse]}
