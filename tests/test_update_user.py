@@ -4,7 +4,7 @@ from user_methods import UserMethods
 
 class TestUpdateUser:
 
-    @allure.title('Изменение поле email пользователя')
+    @allure.title('Изменение поле email и name пользователя')
     def test_update_data_email_user(self, creating_user):
         token, user_body = creating_user
         new_email = f'q{user_body["email"]}'
