@@ -6,7 +6,7 @@
 ## <h>Когорта: 20fs</h>
 <hr>
 
-## <h>Project: API Testing Stellar Burgers</h>
+## <h>Project: API Testing "Stellar Burgers"</h>
 
 ## <h>Инструкция по запуску:</h>
 
