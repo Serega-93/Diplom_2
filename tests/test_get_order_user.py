@@ -1,4 +1,6 @@
 import allure
+
+from data import DataResponse
 from order_methods import OrderMethods
 
 
@@ -18,7 +20,7 @@ class TestGetOrderUser:
         token = ''
         response = OrderMethods.get_orders_user(token)
         actual_body = response.json()
-        expected_body = {"success": False,"message": "You should be authorised"}
+        expected_body = DataResponse.RECEIVING_ORDERS_AUTHORIZED_USER
 
         assert response.status_code == 401
         assert actual_body == expected_body

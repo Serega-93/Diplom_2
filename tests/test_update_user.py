@@ -1,4 +1,6 @@
 import allure
+
+from data import DataResponse
 from user_methods import UserMethods
 
 
@@ -24,7 +26,7 @@ class TestUpdateUser:
         token = ''
         response = UserMethods.update_user_data(update_body, token)
         actual_body = response.json()
-        expected_body = {"success": False,"message": "You should be authorised"}
+        expected_body = DataResponse.UPDATE_DATA_WITHOUT_AUTHORIZATION_USER
 
         assert response.status_code == 401
         assert actual_body == expected_body

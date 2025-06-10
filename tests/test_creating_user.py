@@ -1,5 +1,7 @@
 import allure
 import pytest
+
+from data import DataResponse
 from generator import DataCreatedUser
 from user_methods import UserMethods
 
@@ -21,7 +23,7 @@ class TestCreatingUser:
     def test_creating_registered_user(self, creating_user):
         token, user_body = creating_user
         response = UserMethods.created_user(user_body)
-        expected_body = {"success": False,"message": "User already exists"}
+        expected_body = DataResponse.CREATING_REGISTERED_USER
         actual_body = response.json()
 
         assert response.status_code == 403
@@ -33,7 +35,7 @@ class TestCreatingUser:
     def test_creating_user_without_filled_field(self, email, password, name):
         user_body = {"email": email, "password": password, "name": name}
         response = UserMethods.created_user(user_body)
-        expected_body ={"success": False, "message": "Email, password and name are required fields"}
+        expected_body = DataResponse.CREATING_USER_WITHOUT_FILLED_FIELD
         actual_body = response.json()
 
         assert response.status_code == 403
